@@ -1,25 +1,22 @@
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+/* #include <GL/glew.h>
+#include <GLFW/glfw3.h> */ 
+// will be used in the future
+
+#include "./physics.h"
 
 int main(int argc, char *argv[]){
- glfwInit();
- glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
- glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
- GLFWwindow* window = glfwCreateWindow(600, 600, "2D visualizer", NULL, NULL);
- glfwMakeContextCurrent(window);
+printf("test FPS...");
+system("clear"); // "cls" for windows
 
- glewInit();
-
- glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
- while (!glfwWindowShouldClose(window)) {
-  glClear(GL_COLOR_BUFFER_BIT);
-  glfwSwapBuffers(window);
-  glfwPollEvents();
- }
-
- glfwTerminate();
+for(int k=0; k < 300; k++){
+ wait_next_frame();
+ printf("time rendered: %d\n", k+1);
+ system("clear");
+};
+scanf("clear: ");
+system("clear");
+ 
 return 0;
 }
 

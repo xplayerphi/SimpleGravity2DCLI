@@ -4,6 +4,7 @@
 #include <time.h>
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #ifdef _WIN32
  #include <windows.h>
@@ -26,10 +27,10 @@ struct Entity {
 struct Entity *create_body(
 int id, double mass, double pos[2], double vel[2], double acc[2], double radius
 );
- 
+
+void u_sleep(int milliseconds);
+void wait_next_frame();
 void apply_physics(struct Entity *body); 
-double wait_next_frame(); 
-int u_sleep(int milliseconds);
 char *printf_bodyi(struct Entity *body);
 
 #endif
