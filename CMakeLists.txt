@@ -1,31 +1,33 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(Gravity2DCLI)
+project(Gravity2DCLI VERSION 11.2 LANGUAGES C)
 
-set(CMAKE_C_STANDARD 99)
+ set(CMAKE_C_STANDARD 99)
+ set(CMAKE_C_STANDARD_REQUIRED ON)
 
-find_package(OpenGL REQUIRED)
+ cmake_policy(SET CMP0072 NEW)
 
-cmake_policy(SET CMP0072 NEW)
+ find_package(OpenGL REQUIRED)
+ find_package(PkgConfig REQUIRED)
 
-find_package(PkgConfig REQUIRED)
-    pkg_check_modules(GLFW REQUIRED glfw3)
-    pkg_check_modules(GLEW REQUIRED glew)
+ pkg_check_modules(GLFW REQUIRED glfw3)
+ pkg_check_modules(GLEW REQUIRED glew)
 
-include_directories(
- ${OPENGL_INCLUDE_DIR}
- ${GLFW_INCLUDE_DIRS}
- ${GLEW_INCLUDE_DIRS}
-)
+ add_executable(Gravity2DCLI
+  main.c
+  physics.c
+ )
 
-add_executable(Gravity2DCLI
- main.c
- physics.c
-)
+ target_include_directories(Gravity2DCLI PRIVATE
+  ${OPENGL_INCLUDE_DIR}
+  ${GLFW_INCLUDE_DIRS}
+  ${GLEW_INCLUDE_DIRS}
+ )
 
-target_link_libraries(Gravity2DCLI
- ${OPENGL_LIBRARIES}
- ${GLFW_LIBRARIES}
- ${GLEW_LIBRARIES}
-)
+ target_link_libraries(Gravity2DCLI PRIVATE
+  ${OPENGL_gl_LIBRARY}
+  ${GLFW_LIBRARIES}
+  ${GLEW_LIBRARIES}
+ )
+
 
