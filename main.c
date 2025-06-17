@@ -11,7 +11,6 @@ printf("test FPS...");
 for(int k=0; k < 300; k++){
  wait_next_frame();
  printf("time rendered: %d\n", k+1);
- system("clear");
 };
 scanf("clear: ");
 system("clear"); // if your OS is windows, use "cls"
