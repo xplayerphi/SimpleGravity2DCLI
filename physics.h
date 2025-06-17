@@ -31,7 +31,6 @@ int id, double mass, double pos[2], double vel[2], double acc[2], double radius
 void u_sleep(int milliseconds);
 void wait_next_frame();
 void apply_physics(struct Entity *body); 
-char *printf_bodyi(struct Entity *body);
+void printf_bodyi(struct Entity *body);
 
 #endif
-
