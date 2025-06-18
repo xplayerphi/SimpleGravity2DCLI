@@ -53,3 +53,8 @@ void printf_bodyi(struct Entity *body){
   body->a[0], body->a[1]
  );
 }
+
+void free_body(struct Entity* body) {
+    free(body);
+}
+

@@ -32,5 +32,6 @@ void u_sleep(int milliseconds);
 void wait_next_frame();
 void apply_physics(struct Entity *body); 
 void printf_bodyi(struct Entity *body);
+void free_body(struct Entity *body);
 
 #endif

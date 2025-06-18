@@ -8,7 +8,7 @@ int main(int argc, char *argv[]){
 
 printf("test FPS...");
 
-for(int k=0; k < 300; k++){
+for(int k=0; k < DELTA_T*480; k++){
  wait_next_frame();
  printf("time rendered: %d\n", k+1);
 };
@@ -18,14 +18,14 @@ system("clear"); // if your OS is windows, use "cls"
 // the main game config:
 
 double pos[2] = {0.0, 1.0};
-double vel[2] = {0.5, 1.1};
-double acc[2] = {0.0, -0.1};
-double radius = 1.0; 
+double vel[2] = {10.0, 0.0};
+double acc[2] = {0.0, -9.8};
+double radius = 1.0;
 
 struct Entity *body1 = create_body(1, 1.0, pos, vel, acc, radius);
 
 clock_t start = clock();
-int k = 0;  
+int k = 0;
 char *enter_res = "h";
 double time = 0.0;
 
@@ -40,7 +40,7 @@ printf_bodyi(body1);
 if(body1->s[1] <= 0){
 break;
 system("clear");
-printf("\n the ball stopped in: %d,%d \n", body1->s[0], body1->s[1]);
+printf("\n the ball stopped in: %.f2,%.f2 \n", body1->s[0], body1->s[1]);
 };
 
 wait_next_frame();
@@ -48,7 +48,8 @@ wait_next_frame();
 system("clear");
 k++;
 };
- 
+
+free_body(body1); 
 clock_t end = clock();
 return 0;
 }
