@@ -1,7 +1,3 @@
-/* #include <GL/glew.h>
-#include <GLFW/glfw3.h> */ 
-// will be used in the future
-
 #include "./physics.h"
 
 int main(int argc, char *argv[]){
@@ -15,41 +11,26 @@ for(int k=0; k < DELTA_T*480; k++){
 scanf("clear: ");
 system("clear"); // if your OS is windows, use "cls"
 
-// the main game config:
+// the main game config
+ struct Entity *bodies[MAX_BODIES];
+ int count = 2;
+ double pos1[2] = {0.0, 0.0};
+ double vel1[2] = {0.0, 0.0};
+ double acc1[2] = {0.0, 0.0};
+ bodies[0] = create_body(1, 1000.0, pos1, vel1, acc1, 1.0);
 
-double pos[2] = {0.0, 1.0};
-double vel[2] = {10.0, 0.0};
-double acc[2] = {0.0, -9.8};
-double radius = 1.0;
+ double pos2[2] = {10.0, 0.0};
+ double vel2[2] = {0.0, 5.0};
+ double acc2[2] = {0.0, 0.0};
+ bodies[1] = create_body(2, 1.0, pos2, vel2, acc2, 0.5);
 
-struct Entity *body1 = create_body(1, 1.0, pos, vel, acc, radius);
+ for(int step = 0; 1; step++) {
+  apply_physics(bodies, count);
+  printf("Step %d:\n", step);
+  for(int i = 0; i < count; i++) printf_bodyi(bodies[i]);
+   wait_next_frame();
+ }
 
-clock_t start = clock();
-int k = 0;
-char *enter_res = "h";
-double time = 0.0;
-
-while(1){
-double seconds = (double)(clock() - start)/CLOCKS_PER_SEC;
-printf(" %d. The simulation: time: %.2f s \n\n", k+1, time + DELTA_T);
-apply_physics(body1);
-time = time + DELTA_T;
-printf_bodyi(body1);
-
-// only for fun:
-if(body1->s[1] <= 0){
-break;
-system("clear");
-printf("\n the ball stopped in: %.f2,%.f2 \n", body1->s[0], body1->s[1]);
-};
-
-wait_next_frame();
-
-system("clear");
-k++;
-};
-
-free_body(body1); 
-clock_t end = clock();
-return 0;
+  free_bodies(bodies, count);
+  return 0;
 }

@@ -14,6 +14,7 @@
 
 #define DELTA_T (1.0/60.0)
 #define MAX_D 4095
+#define MAX_BODIES 127
 
 struct Entity {
  int id; // id
@@ -30,8 +31,10 @@ int id, double mass, double pos[2], double vel[2], double acc[2], double radius
 
 void u_sleep(int milliseconds);
 void wait_next_frame();
-void apply_physics(struct Entity *body); 
+void compute_gravity(struct Entity **bodies, int count);
+void apply_physics(struct Entity **bodies, int count);
 void printf_bodyi(struct Entity *body);
 void free_body(struct Entity *body);
+void free_bodies(struct Entity **bodies, int count);
 
 #endif
